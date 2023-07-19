@@ -30,7 +30,6 @@ export default function SignUp() {
     e.preventDefault();
     // Sends POST HTTP request to /signup route in the backend with name, email, and password
     try {
-      //https://social-ntw-api.vercel.app
       const response = await axios.post('https://social-ntw-api.vercel.app/signup', {
         name,
         email,
