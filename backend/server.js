@@ -5,6 +5,7 @@ const cors = require('cors');
 const connectDatabase = require('./database');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user_routes');
+const PORT = procesos.env.PORT || 3000;
 
 connectDatabase();
 
@@ -29,6 +30,6 @@ app.get("/", (req, res) => {
 })
 app.use(userRoutes);
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
