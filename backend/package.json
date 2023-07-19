@@ -2,8 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "scripts": {
-    "start": "node server.js",
-    "build": "echo 'No build steps required for backend deployment on Netlify.'"
+    "start": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
