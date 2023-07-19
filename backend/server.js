@@ -8,7 +8,7 @@ const userRoutes = require('./routes/user_routes');
 // Enable CORS on all routes
 app.use(cors(
     {
-        origin: 'https://social-ntw-frontend.vercel.app',
+        origin: 'https://social-ntw-api.vercel.app',
         methods: ['POST', 'GET'],
         credentials: true
     }
