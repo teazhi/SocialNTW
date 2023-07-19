@@ -39,9 +39,9 @@ export default function SignUp() {
       // Handle successful signup response (e.g., show success message)
       console.log(response.data);
       setSignupMessage('Sign up successful!'); // Display a success message
-      setTimeout(() => {
-        window.location.href = '/dashboard'; // Redirect to the desired page after a delay
-      }, 2000); // Adjust the delay as needed
+      // setTimeout(() => {
+      //   window.location.href = '/dashboard'; // Redirect to the desired page after a delay
+      // }, 2000); // Adjust the delay as needed
     } catch (error) {
       // Handle signup error (e.g., show error message)
       console.error(error);
