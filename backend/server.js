@@ -20,6 +20,7 @@ app.use(express.json());
 mongoose.connect('mongodb+srv://williamlin6803:gk0KNs9V9F5zRRFB@cluster0.bmghano.mongodb.net/AllUsers?retryWrites=true&w=majority')
 app.use(userRoutes);
 
+
 // connectDatabase();
 
 app.listen(PORT, () => {

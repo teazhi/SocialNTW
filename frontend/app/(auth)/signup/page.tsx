@@ -22,13 +22,15 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signupMessage, setSignupMessage] = useState('');
+
+axios.defaults.withCredentials = true;
   
   // Handle sign up form submission, which is invoked when the signup button is called: <form onSubmit={handleSignUp}>
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Sends POST HTTP request to /signup route in the backend with name, email, and password
     try {
-      const response = await axios.post('/signup', {
+      const response = await axios.post('https://social-ntw-api.vercel.app/signup', {
         name,
         email,
         password,
