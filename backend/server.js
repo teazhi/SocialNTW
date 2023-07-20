@@ -5,7 +5,7 @@ const cors = require('cors');
 const connectDatabase = require('./database');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user_routes');
-const PORT = procesos.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 // connectDatabase();
 
