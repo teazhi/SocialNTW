@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user_model');
+const connectDatabase = require('./database.js');
 
 // Route to create a new user and save it to the database
-router.post('/signup', (req, res) => {
+router.post('/signup', async (req, res) => {
+    await connectDatabase();
     const { name, email, password } = req.body;
 
     const newUser = new User({
