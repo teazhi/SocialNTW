@@ -109,7 +109,7 @@ export default function Footer() {
           </ul>
 
           {/* Copyrights note */}
-          <div className="text-sm text-gray-200 mr-4">&copy; smdash.com</div>
+          <div className="text-sm text-gray-200 mr-4">&copy; smdash.com | Founders: Tevin Zhuo & William Lin</div>
 
         </div>
 
