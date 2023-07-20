@@ -19,12 +19,15 @@ export default function SignIn() {
       const response = await axios.post('https://social-ntw-api.vercel.app/signin', { email, password });
       console.log(response.data);
       console.log(response.data);
-      setSigninMessage('Sign up successful!'); // Display a success message
+      setSigninMessage('Sign in successful!'); // Display a success message
+      setTimeout(() => {
+        window.location.href = '/dashboard'; // Redirect to the desired page after a delay
+      }, 2000); // Adjust the delay as needed
       // TODO: Redirect the user to the homepage or dashboard
     } catch (error) {
       console.error(error);
       // TODO: Show an error message to the user
-      setSigninMessage('Sign up failed. Please try again.'); // Display an error message
+      setSigninMessage('Sign in failed. Please try again.'); // Display an error message
     }
   };
 
