@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 3000;
 // Enable CORS on all routes
 app.use(cors(
     {
-        origin: ["https://social-ntw-frontend.vercel.app"],
+        origin: ["https://socialntw.com"],
         methods: ['POST', 'GET', 'OPTIONS'],
         credentials: true
     }
