@@ -117,7 +117,7 @@ export default function SignUp() {
             )}
 
             <div className="text-gray-300 text-center mt-6">
-              Already using smdash? <Link href="/signin" className="text-orange-100 hover:underline transition duration-150 ease-in-out">Sign in</Link>
+              Already using SocialNTW? <Link href="/signin" className="text-orange-100 hover:underline transition duration-150 ease-in-out">Sign in</Link>
             </div>
           </div>
         </div>
