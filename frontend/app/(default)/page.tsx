@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Home | smdash',
+  title: 'Home | SocialNTW',
   description: 'Page description',
 }
 
