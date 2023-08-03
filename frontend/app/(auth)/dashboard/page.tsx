@@ -58,13 +58,19 @@ const Dashboard = ({ socialMediaData }: { socialMediaData: SocialMediaData }) =>
 export default Dashboard;
 
 export const getServerSideProps = async () => {
-  // Fetch the social media data here.
-  // This could involve calling an API or database.
-  const socialMediaData: SocialMediaData = {
-    // Example data here...
-  };
+  try {
+    const response = await fetch('http://your-api-url/instagram/followers');
+    const socialMediaData = await response.json();
 
-  return {
-    props: { socialMediaData }, // Will be passed to the Dashboard component as props
-  };
+    return {
+      props: { socialMediaData }, // Will be passed to the Dashboard component as props
+    };
+  } catch (error) {
+    console.error("Error fetching Instagram followers:", error);
+
+    // Handle error or provide default data
+    return {
+      props: { socialMediaData: {} },
+    };
+  }
 }
