@@ -10,10 +10,10 @@
 import React, { useState } from 'react';
 const axios = require('axios');
 
-export const metadata = {
-  title: 'Sign Up | smdash',
-  description: 'Page description',
-};
+// export const metadata = {
+//   title: 'Sign Up | smdash',
+//   description: 'Page description',
+// };
 
 import Link from 'next/link';
 
