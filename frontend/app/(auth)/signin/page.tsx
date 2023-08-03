@@ -32,7 +32,7 @@ export default function SignIn() {
   };
 
   return (
-    <section className="bg-gradient-to-b from-gray-900 to-gray-901">
+    <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-12 pb-12 md:pt-20 md:pb-20">
 

@@ -10,10 +10,10 @@
 import React, { useState } from 'react';
 const axios = require('axios');
 
-// export const metadata = {
-//   title: 'Sign Up | smdash',
-//   description: 'Page description',
-// };
+export const metadata = {
+  title: 'Sign Up | smdash',
+  description: 'Page description',
+};
 
 import Link from 'next/link';
 
@@ -39,7 +39,7 @@ export default function SignUp() {
       console.log(response.data);
       setSignupMessage('Sign up successful!'); // Display a success message
       setTimeout(() => {
-        window.location.href = '/dashboard'; // Redirect to the desired page after a delay
+        window.location.href = '/account'; // Redirect to the desired page after a delay
       }, 2000); // Adjust the delay as needed
     } catch (error) {
       // Handle signup error (e.g., show error message)
@@ -50,7 +50,7 @@ export default function SignUp() {
 
   // Rendering sign up form
   return (
-    <section className="bg-gradient-to-b from-gray-900 to-gray-901">
+    <section className="bg-gray-901">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-12 pb-12 md:pt-20 md:pb-20">
           <div className="max-w-2xl mx-auto text-orange-100 text-center pb-6 md:pb-6">
