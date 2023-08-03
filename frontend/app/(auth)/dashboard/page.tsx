@@ -18,7 +18,7 @@ interface SocialMediaData {
   posts?: Post[];
 }
 
-const Dashboard = ({ socialMediaData = {} }: { socialMediaData?: SocialMediaData }) => {
+const Dashboard = ({ socialMediaData }: { socialMediaData: SocialMediaData }) => {
   const {
     username = 'username_here',
     profilePic = 'profile_picture_url_here',
@@ -56,3 +56,15 @@ const Dashboard = ({ socialMediaData = {} }: { socialMediaData?: SocialMediaData
 }
 
 export default Dashboard;
+
+export const getServerSideProps = async () => {
+  // Fetch the social media data here.
+  // This could involve calling an API or database.
+  const socialMediaData: SocialMediaData = {
+    // Example data here...
+  };
+
+  return {
+    props: { socialMediaData }, // Will be passed to the Dashboard component as props
+  };
+}
