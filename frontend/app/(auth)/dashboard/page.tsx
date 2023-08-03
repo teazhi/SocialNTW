@@ -30,7 +30,7 @@ export default function Dashboard({ socialMediaData }: { socialMediaData: Social
   );
 }
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+const getServerSideProps = async (context: GetServerSidePropsContext) => {
   try {
     const CLIENT_ID = '6466673846783326'; // Define CLIENT_ID here
     const CLIENT_SECRET = 'c1820458e70bebb7eebdf34e921a0c48'; // Define CLIENT_SECRET here
