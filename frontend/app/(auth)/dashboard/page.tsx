@@ -18,7 +18,7 @@ interface SocialMediaData {
   posts?: Post[];
 }
 
-export default function Dashboard({ socialMediaData = {} }: { socialMediaData?: SocialMediaData }) {
+const Dashboard = ({ socialMediaData = {} }: { socialMediaData?: SocialMediaData }) => {
   const {
     username = 'username_here',
     profilePic = 'profile_picture_url_here',
@@ -54,3 +54,5 @@ export default function Dashboard({ socialMediaData = {} }: { socialMediaData?: 
     </section>
   )
 }
+
+export default Dashboard;
