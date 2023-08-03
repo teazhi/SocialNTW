@@ -1,31 +1,19 @@
 export const metadata = {
   title: 'Dashboard | smdash',
   description: 'Page description',
-}
+};
 
-import Link from 'next/link'
+import Link from 'next/link';
+import { GetServerSidePropsContext } from 'next';
 
-interface Post {
-  imageUrl: string;
-  caption: string;
-}
-
-interface SocialMediaData {
-  username?: string;
-  profilePic?: string;
-  bio?: string;
-  followers?: number;
-  posts?: Post[];
-}
+type SocialMediaData = {
+  username: string;
+  profilePic: string;
+  followers: number;
+};
 
 const Dashboard = ({ socialMediaData }: { socialMediaData: SocialMediaData }) => {
-  const {
-    username = 'username_here',
-    profilePic = 'profile_picture_url_here',
-    bio = 'User bio here',
-    followers = 1000,
-    posts = [],
-  } = socialMediaData;
+  const { username, profilePic, followers } = socialMediaData;
 
   return (
     <section className="bg-gradient-to-b from-gray-600 to-gray-901">
@@ -35,42 +23,71 @@ const Dashboard = ({ socialMediaData }: { socialMediaData: SocialMediaData }) =>
             <div className="md:w-1/4 text-white">
               <img src={profilePic} alt={`${username}'s profile`} className="rounded-full mb-4" />
               <h1>{username}</h1>
-              <p className="text-gray-300">{bio}</p>
               <p className="text-gray-400">{followers} Followers</p>
-            </div>
-            <div className="md:w-3/4">
-              <h2 className="text-white mb-4">Recent Posts</h2>
-              <div className="grid grid-cols-3 gap-4">
-                {posts.map((post: Post, index: number) => (
-                  <div key={index}>
-                    <img src={post.imageUrl} alt={post.caption} />
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Dashboard;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   try {
-    const response = await fetch('http://your-api-url/instagram/followers');
-    const socialMediaData = await response.json();
+    const CLIENT_ID = '6466673846783326'; // Define CLIENT_ID here
+    const CLIENT_SECRET = 'c1820458e70bebb7eebdf34e921a0c48'; // Define CLIENT_SECRET here
+    const REDIRECT_URI = 'http://www.socialntw.com/dashboard';
+    const SCOPE = 'user_profile,user_media';
+
+    const req = context.req;
+    if (!req.url) {
+      throw new Error('Request URL is undefined');
+    }
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const authorizationCode = url.searchParams.get('code');
+
+    if (!authorizationCode) {
+      const AUTH_URL = `https://api.instagram.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=code`;
+      return {
+        redirect: {
+          destination: AUTH_URL,
+          permanent: false,
+        },
+      };
+    }
+
+    const TOKEN_URL = 'https://api.instagram.com/oauth/access_token';
+
+    const tokenResponse = await fetch(TOKEN_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&grant_type=authorization_code&redirect_uri=${REDIRECT_URI}&code=${authorizationCode}`,
+    });
+
+    const tokenData = await tokenResponse.json();
+    const accessToken = tokenData.access_token;
+
+    const USER_DETAILS_URL = `https://graph.instagram.com/me?fields=id,username,profile_picture_url&access_token=${accessToken}`;
+    const userDetailsResponse = await fetch(USER_DETAILS_URL);
+    const userData = await userDetailsResponse.json();
+
+    const socialMediaData = {
+      username: userData.username,
+      profilePic: userData.profile_picture_url, // Modify this with the correct field from the API
+      followers: userData.followers_count, // Modify this with the correct field from the API
+    };
 
     return {
-      props: { socialMediaData }, // Will be passed to the Dashboard component as props
+      props: { socialMediaData },
     };
   } catch (error) {
     console.error("Error fetching Instagram followers:", error);
-
-    // Handle error or provide default data
     return {
       props: { socialMediaData: {} },
     };
   }
-}
+};
