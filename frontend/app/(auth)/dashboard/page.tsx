@@ -1,8 +1,6 @@
-export const metadata = {
-  title: 'Dashboard | smdash',
-  description: 'Page description',
-};
+"use client";
 
+import React from 'react';
 import Link from 'next/link';
 import { GetServerSidePropsContext } from 'next';
 
@@ -12,7 +10,7 @@ type SocialMediaData = {
   followers: number;
 };
 
-const Dashboard = ({ socialMediaData }: { socialMediaData: SocialMediaData }) => {
+export default function Dashboard({ socialMediaData }: { socialMediaData: SocialMediaData }) {
   const { username, profilePic, followers } = socialMediaData;
 
   return (
@@ -30,9 +28,7 @@ const Dashboard = ({ socialMediaData }: { socialMediaData: SocialMediaData }) =>
       </div>
     </section>
   );
-};
-
-export default Dashboard;
+}
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   try {

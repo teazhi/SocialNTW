@@ -7,7 +7,6 @@ router.get('/instagram/followers', getInstagramFollowers);
 
 // Route to create a new user and save it to the database
 router.post('/signup', async (req, res) => {
-    // await connectDatabase();
     const { name, email, password } = req.body;
 
     const newUser = new User({
