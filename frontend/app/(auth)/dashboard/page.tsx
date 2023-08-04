@@ -1,8 +1,4 @@
-"use client";
-
-import React from 'react';
-import Link from 'next/link';
-import { GetServerSidePropsContext } from 'next';
+import React, { useState, useEffect } from 'react';
 
 type SocialMediaData = {
   username: string;
@@ -10,7 +6,27 @@ type SocialMediaData = {
   followers: number;
 };
 
-export default function Dashboard({ socialMediaData }: { socialMediaData: SocialMediaData }) {
+export default function Dashboard() {
+  const [socialMediaData, setSocialMediaData] = useState<SocialMediaData | null>(null);
+
+  useEffect(() => {
+    // Replace this with your logic to fetch the social media data
+    fetch('/dashboard')
+      .then((response) => response.json())
+      .then((data) => {
+        setSocialMediaData({
+          username: data.username,
+          profilePic: data.profile_picture_url,
+          followers: data.followers_count, // Adjust this according to the actual API
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching social media data:', error);
+      });
+  }, []);
+
+  if (!socialMediaData) return <div>Loading...</div>; // Display a loading message while the data is being fetched
+
   const { username, profilePic, followers } = socialMediaData;
 
   return (
