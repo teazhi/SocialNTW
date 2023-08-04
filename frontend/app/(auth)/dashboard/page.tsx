@@ -14,7 +14,7 @@ export default function Dashboard({ socialMediaData }: { socialMediaData: Social
   const { username, profilePic, followers } = socialMediaData;
 
   return (
-    <section className="bg-gradient-to-b from-gray-600 to-gray-901">
+    <section className="bg-gradient-to-b from-gray-600 to-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-12 pb-12 md:pt-20 md:pb-20">
           <div className="flex flex-col md:flex-row">
@@ -29,61 +29,3 @@ export default function Dashboard({ socialMediaData }: { socialMediaData: Social
     </section>
   );
 }
-
-const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  try {
-    const CLIENT_ID = '6466673846783326'; // Define CLIENT_ID here
-    const CLIENT_SECRET = 'c1820458e70bebb7eebdf34e921a0c48'; // Define CLIENT_SECRET here
-    const REDIRECT_URI = 'http://www.socialntw.com/dashboard';
-    const SCOPE = 'user_profile,user_media';
-
-    const req = context.req;
-    if (!req.url) {
-      throw new Error('Request URL is undefined');
-    }
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    const authorizationCode = url.searchParams.get('code');
-
-    if (!authorizationCode) {
-      const AUTH_URL = `https://api.instagram.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=code`;
-      return {
-        redirect: {
-          destination: AUTH_URL,
-          permanent: false,
-        },
-      };
-    }
-
-    const TOKEN_URL = 'https://api.instagram.com/oauth/access_token';
-
-    const tokenResponse = await fetch(TOKEN_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&grant_type=authorization_code&redirect_uri=${REDIRECT_URI}&code=${authorizationCode}`,
-    });
-
-    const tokenData = await tokenResponse.json();
-    const accessToken = tokenData.access_token;
-
-    const USER_DETAILS_URL = `https://graph.instagram.com/me?fields=id,username,profile_picture_url&access_token=${accessToken}`;
-    const userDetailsResponse = await fetch(USER_DETAILS_URL);
-    const userData = await userDetailsResponse.json();
-
-    const socialMediaData = {
-      username: userData.username,
-      profilePic: userData.profile_picture_url, // Modify this with the correct field from the API
-      followers: userData.followers_count, // Modify this with the correct field from the API
-    };
-
-    return {
-      props: { socialMediaData },
-    };
-  } catch (error) {
-    console.error("Error fetching Instagram followers:", error);
-    return {
-      props: { socialMediaData: {} },
-    };
-  }
-};
