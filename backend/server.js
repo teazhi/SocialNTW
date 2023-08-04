@@ -17,13 +17,12 @@ const PORT = process.env.PORT || 3000;
 })();
 
 // Enable CORS on all routes
-app.use(cors(
-    {
-        origin: ["https://www.socialntw.com"],
-        methods: ['POST', 'GET', 'OPTIONS'],
-        credentials: true
-    }
-));
+app.use(cors({
+    origin: ["https://www.socialntw.com"],
+    methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'], // Add any other HTTP methods you need
+    allowedHeaders: ['Content-Type', 'Authorization'], // Add any other headers you need
+    credentials: true
+}));
 
 app.use(express.json());
 
