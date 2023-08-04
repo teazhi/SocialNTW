@@ -27,9 +27,9 @@ app.use(cors({
     credentials: true
 }));
 
-app.get("/", (req, res) => {
-    res.json("Hello");
-})
+// app.get("/", (req, res) => {
+//     res.json("Hello");
+// })
 app.use(userRoutes);
 app.use('/instagram', instagramRoutes);
 
