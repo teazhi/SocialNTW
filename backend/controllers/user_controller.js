@@ -1,5 +1,6 @@
 const User = require('../models/user_model');
 const fetch = require('node-fetch');
+const axios = require('axios');
 const url = require('url');
 
 // creates User object based on request from client
