@@ -17,6 +17,8 @@ const PORT = process.env.PORT || 3000;
     }
 })();
 
+app.use(express.json());
+
 // Enable CORS on all routes
 app.use(cors({
     origin: ["https://www.socialntw.com"],
@@ -24,8 +26,6 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'], // Add any other headers you need
     credentials: true
 }));
-
-app.use(express.json());
 
 app.get("/", (req, res) => {
     res.json("Hello");
