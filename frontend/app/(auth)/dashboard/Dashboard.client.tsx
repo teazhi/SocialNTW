@@ -11,7 +11,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Replace this with your logic to fetch the social media data
-    fetch('/dashboard')
+    fetch('/instagram/dashboard')
       .then((response) => response.json())
       .then((data) => {
         setSocialMediaData({
