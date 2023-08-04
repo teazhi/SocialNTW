@@ -7,8 +7,6 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/user_routes');
 const PORT = process.env.PORT || 3000;
 
-// connectDatabase();
-
 (async () => {
     try {
         await connectDatabase();
