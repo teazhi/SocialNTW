@@ -5,7 +5,7 @@ const cors = require('cors');
 const connectDatabase = require('./database');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user_routes');
-const instagramRoutes = require('./routes/instagram_routes');
+// const instagramRoutes = require('./routes/instagram_routes');
 const PORT = process.env.PORT || 3000;
 
 (async () => {
