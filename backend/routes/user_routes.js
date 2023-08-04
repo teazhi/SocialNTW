@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user_model');
-// const { getInstagramFollowers } = require('./user_controller'); // Use require here
-
-// router.get('/dashboard', userController.getInstagramDashboard);
 
 // Route to create a new user and save it to the database
 router.post('/signup', async (req, res) => {
