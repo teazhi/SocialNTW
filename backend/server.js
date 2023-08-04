@@ -32,7 +32,7 @@ app.use(cors({
 // })
 
 app.use(userRoutes);
-app.use(instagramRoutes);
+app.use('/instagram', instagramRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
